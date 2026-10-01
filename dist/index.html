@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#162c28"><meta name="description" content="果実温度と室温・湿度から、みかんの結露リスクを判定します。">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="みかん結露">
+  <title>みかん結露チェッカー</title><link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon-192.png"><link rel="apple-touch-icon" href="./icons/apple-touch-icon.png"><link rel="stylesheet" href="./style.css"><script defer src="./app.js"></script>
+</head>
+<body>
+<header><div class="brand"><span class="mark" aria-hidden="true">◉</span><span>選果場の温湿度管理</span></div><h1>みかん結露チェッカー</h1><p>果実温度と空気の状態から結露リスクを判定</p></header>
+<main>
+  <section class="inputs" aria-labelledby="input-title">
+    <div class="section-heading"><h2 id="input-title">測定値を入力</h2><span>変更すると自動判定</span></div>
+    <form id="checker" novalidate>
+      <div class="field"><div class="field-heading"><label for="fruit">果実温度</label><span>−10〜50℃</span></div><div class="stepper"><button type="button" data-field="fruit" data-direction="-1" aria-label="果実温度を0.5℃下げる">−</button><div class="number"><input id="fruit" name="fruit" type="number" inputmode="decimal" min="-10" max="50" step="0.1" value="10" required aria-describedby="fruit-error"><span>℃</span></div><button type="button" data-field="fruit" data-direction="1" aria-label="果実温度を0.5℃上げる">＋</button></div><p class="error" id="fruit-error"></p></div>
+      <div class="field"><div class="field-heading"><label for="air">室温</label><span>−10〜50℃</span></div><div class="stepper"><button type="button" data-field="air" data-direction="-1" aria-label="室温を0.5℃下げる">−</button><div class="number"><input id="air" name="air" type="number" inputmode="decimal" min="-10" max="50" step="0.1" value="20" required aria-describedby="air-error"><span>℃</span></div><button type="button" data-field="air" data-direction="1" aria-label="室温を0.5℃上げる">＋</button></div><p class="error" id="air-error"></p></div>
+      <div class="field"><div class="field-heading"><label for="humidity">相対湿度</label><span>1〜100％</span></div><div class="stepper"><button type="button" data-field="humidity" data-direction="-1" aria-label="湿度を1％下げる">−</button><div class="number"><input id="humidity" name="humidity" type="number" inputmode="decimal" min="1" max="100" step="0.1" value="70" required aria-describedby="humidity-error"><span>％</span></div><button type="button" data-field="humidity" data-direction="1" aria-label="湿度を1％上げる">＋</button></div><p class="error" id="humidity-error"></p></div>
+      <button class="judge" type="submit">判定する</button><p class="save-status" id="save-status">入力値はこの端末に保存されます</p>
+    </form>
+  </section>
+  <section class="result" id="result" data-risk="high" aria-labelledby="result-title" aria-live="polite" aria-atomic="true">
+    <div class="section-heading"><h2 id="result-title">判定結果</h2><span id="result-status">現在の測定値</span></div>
+    <div id="result-content"><div class="risk-label">結露リスク</div><div class="risk"><span id="risk-symbol" aria-hidden="true">!</span><strong id="risk-name">高</strong></div><p class="explanation" id="explanation"></p>
+    <div class="metrics"><div><span>露点温度</span><strong><b id="dew">—</b><small>℃</small></strong></div><div><span>果実温度</span><strong><b id="fruit-result">—</b><small>℃</small></strong></div><div><span>露点との差</span><strong><b id="difference">—</b><small>℃</small></strong></div></div>
+    <div class="warming"><span>低リスクの目安まで</span><p id="warming-text"></p><small id="target"></small></div>
+    <p class="result-note">「低」は結露しない保証ではありません。<br>果実の表面温度と、触れる空気の状態で確認してください。</p></div>
+    <p id="invalid-result" hidden>入力値を確認してください。正しい値を入力すると、判定結果が表示されます。</p>
+  </section>
+  <section class="guide"><h2>判定の見方</h2><div class="legend"><span class="high">高</span><p>果実温度 ≤ 露点温度</p><span class="caution">注意</span><p>露点より高く、差が2℃未満</p><span class="low">低</span><p>露点との差が2℃以上</p></div><p>露点は、空気中の水蒸気が結露し始める温度です。室温と湿度からMagnus式で求めます。表示は小数第1位、判定は丸め前の値を使用します。</p></section>
+</main><footer><span>みかん結露チェッカー</span><span id="offline-status">オフライン準備中</span></footer>
+</body></html>

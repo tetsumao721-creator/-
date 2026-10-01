@@ -1,0 +1,11 @@
+{
+  "id": "./", "name": "みかん結露チェッカー", "short_name": "みかん結露", "lang": "ja",
+  "description": "果実温度と空気の状態から結露リスクを判定",
+  "start_url": "./", "scope": "./", "display": "standalone",
+  "background_color": "#f2f5f4", "theme_color": "#162c28",
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
